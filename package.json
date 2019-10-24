@@ -1,0 +1,28 @@
+{
+  "name": "remote-control",
+  "version": "1.0.0",
+  "description": "A plugin to let one or more client side(s) control the other client side by web-socket.",
+  "main": "index.js",
+  "scripts": {
+    "start": "nodemon /demo/server/server",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/bee0060/remote-control.git"
+  },
+  "author": "Steven Weng",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/bee0060/remote-control/issues"
+  },
+  "homepage": "https://github.com/bee0060/remote-control#readme",
+  "dependencies": {
+    "koa": "^2.10.0",
+    "koa-static": "^5.0.0"
+  },
+  "devDependencies": {
+    "nodemon": "^1.19.4",
+    "ws": "^7.2.0"
+  }
+}
