@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport"
+    content="width=device-width,initial-scale=1,maximum-scale=1.0,minimum-scale=1.0,user-scalable=no" />
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Controller Side</title>
+  <style>
+    /* Prevent user scalable */
+    html,
+    body {
+      touch-action: manipulation;
+    }
+
+    .button {
+      display: flex;
+    }
+
+    button {
+      background-color: gray;
+      border: white;
+      color: white;
+      font-size: 14px;
+      height: 30px;
+      margin: 20px 30px;
+      width: 100px;
+    }
+  </style>
+</head>
+
+<body>
+
+  <h1>Welcome to controller page!</h1>
+  <div class="buttons">
+    <button onclick="onUp();">UP</button>
+    <button onclick="onLeft();">LEFT</button>
+    <button onclick="onRight();">RIGHT</button>
+    <button onclick="onDown();">DOWN</button>
+  </div>
+  <script>
+    /* Prevent user scalable */
+    window.onload = () => {
+      document.addEventListener('touchstart', (event) => {
+        if (event.touches.length > 1) {
+          event.preventDefault();
+        }
+      }, { passive: false });
+
+      let lastTouchEnd = 0;
+      document.addEventListener('touchend', (event) => {
+        const now = (new Date()).getTime();
+        if (now - lastTouchEnd <= 300) {
+          event.preventDefault();
+        }
+        lastTouchEnd = now;
+      }, false);
+    }
+
+    const sendCommand = (command) => () => {
+      return fetch(`input?command=${command}`)
+        .then(function (response) {
+          console.log('request end', response);
+          return response;
+        });
+    }
+
+    const onUp = sendCommand('UP');
+    const onLeft = sendCommand('LEFT');
+    const onRight = sendCommand('RIGHT');
+    const onDown = sendCommand('DOWN');
+  </script>
+</body>
+
+</html>

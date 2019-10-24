@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Controlled Side</title>
+</head>
+
+<body>
+  <h1>Hello this is controlled side</h1>
+  <div id="output"></div>
+
+  <script>
+    // Create WebSocket connection.
+    const socket = new WebSocket('ws://localhost:6200');
+
+    // Connection opened
+    socket.addEventListener('open', function (event) {
+      socket.send('Hello Server!');
+    });
+
+    socket.addEventListener('close', function (event) {
+      socket = null;
+    });
+
+    // Listen for messages
+    socket.addEventListener('message', function (event) {
+      const message = `Message from server: ${event.data}`;
+      console.log(message);
+
+      const outputContainer = document.getElementById('output')
+      const newP = document.createElement('p');
+      newP.innerHTML = message;
+      outputContainer.appendChild(newP);
+    });
+  </script>
+</body>
+
+</html>
