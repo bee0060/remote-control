@@ -34,3 +34,9 @@ url: http://IPOfYourServer:6100/controlled
 ```
 
 Enjoy!
+
+------
+
+### TODO List
+
+1. Use grid to style control side buttons position
