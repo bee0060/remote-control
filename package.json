@@ -18,11 +18,11 @@
   },
   "homepage": "https://github.com/bee0060/remote-control#readme",
   "dependencies": {
-    "koa": "^2.10.0",
+    "koa": "^2.12.1",
     "koa-static": "^5.0.0"
   },
   "devDependencies": {
     "nodemon": "^1.19.4",
-    "ws": "^7.2.0"
+    "ws": "^7.3.0"
   }
 }
