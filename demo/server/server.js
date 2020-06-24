@@ -72,3 +72,5 @@ function commandHandler(context, next) {
 }
 
 console.log('server startup!')
+console.log('Please visit controller side on:', `http://localhost:${SERVER_PORT}/controller`)
+console.log('Please visit controlled side on:', `http://localhost:${SERVER_PORT}/controlled`)
