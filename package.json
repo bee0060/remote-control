@@ -4,7 +4,7 @@
   "description": "A plugin to let one or more client side(s) control the other client side by web-socket.",
   "main": "index.js",
   "scripts": {
-    "start": "nodemon /demo/server/server",
+    "start": "nodemon",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {

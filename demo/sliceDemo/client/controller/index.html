@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta
+      name="viewport"
+      content="width=device-width,initial-scale=1,maximum-scale=1.0,minimum-scale=1.0,user-scalable=no"
+    />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <title>Controller Side</title>
+    <style>
+      /* Prevent user scalable */
+      html,
+      body {
+        touch-action: manipulation;
+      }
+
+      :root {
+        --button-background: #0540f2;
+      }
+
+      body {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        height: 100vh;
+      }
+      .buttons {
+        display: flex;
+        flex-wrap: wrap;
+        position: absolute;
+      }
+
+      button {
+        border: 50px solid white;
+        cursor: pointer;
+        height: 0;
+        outline: 0;
+        padding: 0;
+        width: 0;
+      }
+
+      button:hover {
+        --button-background: #056cf2;
+      }
+
+      .vertical-buttons {
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+        height: 350px;
+      }
+
+      .horizontal-buttons {
+        display: flex;
+        flex-direction: row;
+        justify-content: space-between;
+        width: 350px;
+      }
+
+      .up {
+        border-bottom-color: var(--button-background);
+      }
+
+      .down {
+        border-top-color: var(--button-background);
+      }
+
+      .left {
+        border-right-color: var(--button-background);
+      }
+
+      .right {
+        border-left-color: var(--button-background);
+      }
+    </style>
+  </head>
+
+  <body>
+    <div class="buttons vertical-buttons">
+      <button class="up" onclick="onUp();"></button>
+      <button class="down" onclick="onDown();"></button>
+    </div>
+    <div class="buttons horizontal-buttons">
+      <button class="left" onclick="onLeft();"></button>
+      <button class="enter" onclick="onEnter();"></button>
+      <button class="right" onclick="onRight();"></button>
+    </div>
+
+    <script>
+      /* Prevent user scalable */
+      window.onload = () => {
+        document.addEventListener(
+          "touchstart",
+          (event) => {
+            if (event.touches.length > 1) {
+              event.preventDefault();
+            }
+          },
+          { passive: false }
+        );
+      };
+
+      const sendCommand = (command) => () => {
+        return fetch(`input?command=${command}`).then(function (response) {
+          console.log("request end", response);
+          return response;
+        });
+      };
+
+      const onUp = sendCommand("UP");
+      const onLeft = sendCommand("LEFT");
+      const onRight = sendCommand("RIGHT");
+      const onDown = sendCommand("DOWN");
+      const onEnter = sendCommand("ENTER");
+    </script>
+  </body>
+</html>

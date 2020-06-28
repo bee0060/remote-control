@@ -1,0 +1,192 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <title>Controlled Slides Demo</title>
+    <meta
+      name="description"
+      content="A framework for easily creating beautiful presentations using HTML"
+    />
+    <meta name="author" content="Hakim El Hattab" />
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta
+      name="apple-mobile-web-app-status-bar-style"
+      content="black-translucent"
+    />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, minimal-ui"
+    />
+    <link rel="stylesheet" href="/controlled/css/reveal.css" />
+    <link rel="stylesheet" href="/controlled/css/theme/moon.css" id="theme" />
+    <!-- Code syntax highlighting -->
+    <link rel="stylesheet" href="/controlled/lib/css/zenburn.css" />
+    <style>
+      .reveal li {
+        margin-bottom: 15px;
+      }
+    </style>
+    <!-- Printing and PDF exports -->
+    <script>
+      var link = document.createElement("link");
+      link.rel = "stylesheet";
+      link.type = "text/css";
+      link.href = window.location.search.match(/print-pdf/gi)
+        ? "css/print/pdf.css"
+        : "css/print/paper.css";
+      document.getElementsByTagName("head")[0].appendChild(link);
+    </script>
+
+    <!--[if lt IE 9]>
+      <script src="lib/js/html5shiv.js"></script>
+    <![endif]-->
+  </head>
+
+  <body>
+    <div class="reveal">
+      <div class="slides">
+        <!-- 首页 -->
+        <section>
+          <h1>controlled slides</h1>
+          <h3>Steven</h3>
+        </section>
+
+        <section>
+          <h2>Page2</h2>
+          <p>Talk something</p>
+        </section>
+
+        <section>
+          <section>
+            <h3>Page 3</h3>
+            <p>With several sub sections</p>
+            <small>
+              Github:
+              <a href="https://github.com/bee0060" target="_blank"
+                >https://github.com/bee0060</a
+              >
+            </small>
+          </section>
+          <section>
+            <h4>Sub section 1</h4>
+            <p>blablabla ...</p>
+          </section>
+          <section>
+            <h4>Sub section 2</h4>
+            <p>lalalalala...</p>
+          </section>
+          <section>
+            <h4>Sub section 3</h4>
+            <table>
+              <tr>
+                <td>long long table</td>
+                <td>long long table</td>
+              </tr>
+              <tr>
+                <td>long long table</td>
+                <td>long long table</td>
+              </tr>
+            </table>
+          </section>
+          <section>
+            <h4>Sub section 4</h4>
+            <div>Any things</div>
+          </section>
+        </section>
+
+        <section>
+          <h2>
+            Page 4
+          </h2>
+        </section>
+
+        <section>
+          <h2>
+            Page 5
+          </h2>
+        </section>
+
+        <section>
+          <h2>
+            Page 6
+          </h2>
+        </section>
+
+        <section>
+          <h2>
+            Page 7
+          </h2>
+        </section>
+        <section>
+          <h2>Q & A</h2>
+        </section>
+
+        <section>
+          <h2>Thank you</h2>
+        </section>
+      </div>
+    </div>
+
+    <script src="/controlled/lib/js/head.min.js"></script>
+    <script src="/controlled/lib/js/jquery.js"></script>
+    <script src="/controlled/lib/js/typed.min.js"></script>
+    <script src="/controlled/js/reveal.js"></script>
+
+    <script>
+      // Full list of configuration options available at:
+      // https://github.com/hakimel/reveal.js#configuration
+      Reveal.initialize({
+        controls: true,
+        progress: true,
+        history: true,
+        center: true,
+
+        transition: "slide", // none/fade/slide/convex/concave/zoom
+      });
+    </script>
+    <script>
+      Reveal.addEventListener("slidechanged", function (event) {
+        if (!!$(".somestate").html()) {
+          $("#test").typed({
+            strings: ["First sentence.", "Second sentence."],
+            typeSpeed: 0,
+          });
+        }
+      });
+    </script>
+
+    <script>
+      // Create WebSocket connection.
+      const socket = new WebSocket("ws://localhost:6200");
+
+      // Connection opened
+      socket.addEventListener("open", function (event) {
+        socket.send("Hello Server!");
+      });
+
+      socket.addEventListener("close", function (event) {
+        socket = null;
+      });
+
+      const keyboards = {
+        UP: 38,
+        DOWN: 40,
+        LEFT: 37,
+        RIGHT: 39,
+        ENTER: 13,
+      };
+
+      // Listen for messages
+      socket.addEventListener("message", function (event) {
+        const message = `Message from server: ${event.data}`;
+        console.log(message);
+        const nextEvent = new KeyboardEvent("keydown", {
+          bubbles: true,
+          cancelable: true,
+          keyCode: keyboards[event.data],
+        });
+        document.dispatchEvent(nextEvent);
+      });
+    </script>
+  </body>
+</html>
